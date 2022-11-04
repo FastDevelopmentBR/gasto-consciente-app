@@ -1,0 +1,7 @@
+{
+  "name": "gasto-consciente-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
