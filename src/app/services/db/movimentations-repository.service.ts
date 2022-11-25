@@ -24,4 +24,9 @@ export class MovimentationsRepositoryService {
             .then(() => this.databaseService.updateRepository('movimentations'));
     }
 
+    updateMovimentation(id: number, data: Movimentation) {
+        return this.databaseService.update('movimentations', id, data)
+            .then(() => this.databaseService.updateRepository('movimentations'));
+    }
+
 }

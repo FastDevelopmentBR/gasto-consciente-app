@@ -38,5 +38,12 @@ export class Tab1Page {
         this.movimentationsRepository.addMovimentation(movimentation)
     }
 
+    updateMovimentation(id: number) {
+        this.movimentationsRepository.getMovimentation(id).then(data => {
+            let movimentation = data
+            movimentation.value = data.value + 1
+            this.movimentationsRepository.updateMovimentation(id, movimentation)
+        })
+    }
 
 }
