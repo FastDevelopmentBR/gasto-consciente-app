@@ -29,4 +29,13 @@ export class MovimentationsRepositoryService {
             .then(() => this.databaseService.updateRepository('movimentations'));
     }
 
+    deleteMovimentation(id: number) {
+        this.databaseService.delete('movimentations', id)
+            .then(() => this.databaseService.updateRepository('movimentations'));
+    }
+
+    clearMovimentations() {
+        this.databaseService.clearTable('movimentations')
+            .then(() => this.databaseService.updateRepository('movimentations'));
+    }
 }
