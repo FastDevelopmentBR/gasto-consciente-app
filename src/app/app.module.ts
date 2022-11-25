@@ -13,6 +13,8 @@ import { SQLitePorter } from '@awesome-cordova-plugins/sqlite-porter/ngx';
 import { ErrorService } from './error.service';
 import { DatabaseService } from './services/db/database.service';
 
+// DB Providers
+import { MovimentationsRepositoryService } from './services/db/movimentations-repository.service';
 
 // Others
 import { GlobalErrorHandler } from './global-error-handler';
@@ -39,6 +41,7 @@ import { NotificationService } from './notification.service';
         ErrorService,
         NotificationService,
         DatabaseService,
+        MovimentationsRepositoryService
     ],
     bootstrap: [AppComponent],
 })
