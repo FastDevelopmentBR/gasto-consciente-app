@@ -19,4 +19,9 @@ export class MovimentationsRepositoryService {
             .then((data: Movimentation) => data);
     }
 
+    addMovimentation(data: Movimentation) {
+        return this.databaseService.create('movimentations', data)
+            .then(() => this.databaseService.updateRepository('movimentations'));
+    }
+
 }

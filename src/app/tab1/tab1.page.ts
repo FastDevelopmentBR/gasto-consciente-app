@@ -31,6 +31,12 @@ export class Tab1Page {
         });
     }
 
+    addMovimentation() {
+        let movimentation = new Movimentation()
+        movimentation.title = 'teste'
+        movimentation.value = 10
+        this.movimentationsRepository.addMovimentation(movimentation)
+    }
 
 
 }
