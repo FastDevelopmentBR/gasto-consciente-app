@@ -33,7 +33,7 @@ export class DatabaseService {
                     .then((db: SQLiteObject) => {
                         this.storage = db;
                         this.getFakeData();
-                        this.updateRepository('movimentations');
+                        this.getAll('movimentations');
                     });
             }
         });
@@ -56,7 +56,7 @@ export class DatabaseService {
         });
     }
 
-    updateRepository(tableName) {
+    getAll(tableName) {
         let query = `SELECT * FROM ${tableName}`
 
         return this.storage
@@ -73,7 +73,7 @@ export class DatabaseService {
             });
     }
 
-    findOneById(tableName: string, id: number): Promise<Object> {
+    getById(tableName: string, id: number): Promise<Object> {
         let query = `SELECT * FROM ${tableName} WHERE id = ?`
 
         return this.storage
@@ -86,6 +86,7 @@ export class DatabaseService {
         let values = Object.values(data)
         let query = `INSERT INTO ${tableName} (${collumns.join(', ')}) VALUES (${Array(collumns.length).fill('?').join(',')})`
         return this.storage.executeSql(query, values)
+            .then(() => this.getAll(tableName))
     }
 
     update(tableName: string, id: number, data) {
@@ -93,15 +94,53 @@ export class DatabaseService {
         let values = Object.values(data)
         let query = `UPDATE ${tableName} SET ${collumns.map(data => data + '= ?').join(', ')} WHERE id = ${id}`
         return this.storage.executeSql(query, values)
+            .then(() => this.getAll(tableName))
     }
 
     delete(tableName: string, id: number) {
         let query = `DELETE FROM ${tableName} WHERE id = ?`
         return this.storage.executeSql(query, [id])
+            .then(() => this.getAll(tableName))
     }
 
     clearTable(tableName: string) {
         let query = `DELETE FROM ${tableName}`
         return this.storage.executeSql(query, [])
+            .then(() => this[tableName].next([]))
     }
+
+    // importJSONToDB() {
+    //     this.sqlite.create(this.databaseConfig)
+    //         .then((db: any) => {
+    //             let dbInstance = db._objectInstance;
+
+    // let sql = 'CREATE TABLE Artist ([Id] PRIMARY KEY, [Title]);' +
+    //     'INSERT INTO Artist(Id,Title) VALUES ("1","Fred");';
+
+    //             let json = {
+    //                 "structure": {
+    //                     "tables": {
+    //                         "Movimentations": "([id] PRIMARY KEY, [title], [value])"
+    //                     }
+    //                 }
+    //             }
+
+    //             this.sqlitePorter.importJsonToDb(dbInstance, json)
+    //                 .then(() => console.log('SQLite - Imported.'))
+    //                 .catch(e => console.error(e));
+    //         });
+    // }
+
+    // exportDBToJSON() {
+    //     this.sqlite.create(this.databaseConfig)
+    //         .then((db: any) => {
+    //             let dbInstance = db._objectInstance;
+
+    //             this.sqlitePorter.exportDbToJson(dbInstance)
+    //                 .then((data) => console.log(`SQLite - Exported.\n ${JSON.stringify(data)}`))
+    //                 .catch(e => console.log(e));
+    //         }).catch(e => console.log(e));
+    // }
 }
+
+

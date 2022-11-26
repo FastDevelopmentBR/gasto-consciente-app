@@ -46,4 +46,8 @@ export class Tab1Page {
     deleteMovimentation(id: number) {
         this.movimentationsRepository.deleteMovimentation(id)
     }
+
+    clearTableMovimentation() {
+        this.movimentationsRepository.clearMovimentations()
+    }
 }
