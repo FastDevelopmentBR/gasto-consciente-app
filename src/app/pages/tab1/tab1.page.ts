@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
-import { DatabaseService } from '../services/db/database.service';
-import { Movimentation } from '../services/db/movimentation';
-import { MovimentationsRepositoryService } from '../services/db/movimentations-repository.service';
+import { DatabaseService } from '../../services/db/database.service';
+import { MovimentationsRepositoryService } from '../../services/db/movimentations-repository.service';
+
+import { Movimentation } from '../../services/db/movimentation';
 
 @Component({
     selector: 'app-tab1',
@@ -11,7 +12,6 @@ import { MovimentationsRepositoryService } from '../services/db/movimentations-r
     styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-    movimentations: Movimentation[] = []
     movimentation: Movimentation = undefined
 
     constructor(public platform: Platform,
@@ -22,9 +22,6 @@ export class Tab1Page {
     ngOnInit() {
         this.databaseService.dbState().subscribe((res) => {
             if (res) {
-                this.movimentationsRepository.getMovimentations()
-                    .subscribe(data => this.movimentations = data)
-
                 this.movimentationsRepository.getMovimentation(1)
                     .then(data => this.movimentation = data)
             }

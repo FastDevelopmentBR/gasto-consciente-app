@@ -13,11 +13,6 @@
         </ion-toolbar>
     </ion-header>
 
-    <h2>Listando...</h2>
-    <div *ngFor="let movimentation of movimentations">
-        <p>{{ movimentation | json }}</p>
-    </div>
-
     <h2>Acessando um único item</h2>
     <p>{{ movimentation | json }}</p>
 
@@ -25,4 +20,5 @@
     <button (click)="addMovimentation()">Adicionar</button>
     <button (click)="updateMovimentation(1)">Atualizar</button>
     <button (click)="deleteMovimentation(3)">Remover</button>
+    <p><strong>build number:</strong> 2022-11-25 17:54</p>
 </ion-content>
