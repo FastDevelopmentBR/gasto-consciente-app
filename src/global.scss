@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,21 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.ion-color-gcprimary {
+    --ion-color-base: var(--ion-color-gcprimary);
+    --ion-color-base-rgb: var(--ion-color-gcprimary-rgb);
+    --ion-color-contrast: var(--ion-color-gcprimary-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-gcprimary-contrast-rgb);
+    --ion-color-shade: var(--ion-color-gcprimary-shade);
+    --ion-color-tint: var(--ion-color-gcprimary-tint);
+}
+
+.ion-color-gcsecondary {
+    --ion-color-base: var(--ion-color-gcsecondary);
+    --ion-color-base-rgb: var(--ion-color-gcsecondary-rgb);
+    --ion-color-contrast: var(--ion-color-gcsecondary-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-gcsecondary-contrast-rgb);
+    --ion-color-shade: var(--ion-color-gcsecondary-shade);
+    --ion-color-tint: var(--ion-color-gcsecondary-tint);
+}
