@@ -5,6 +5,9 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
+// Custom Modules
+import { SharedModule } from './shared/shared.module';
+
 // Native Plugins
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { SQLitePorter } from '@awesome-cordova-plugins/sqlite-porter/ngx';
@@ -27,9 +30,9 @@ import { NotificationService } from './notification.service';
     declarations: [AppComponent],
     imports: [
         BrowserModule,
-        HttpClientModule,
         IonicModule.forRoot(),
-        AppRoutingModule
+        AppRoutingModule,
+        SharedModule
     ],
     providers: [
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
