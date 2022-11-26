@@ -29,9 +29,15 @@ $ npm start
 
 ## Tecnologias Utilizadas
 
-[![Ionic Framework v6](https://img.shields.io/static/v1?label=Ionic&message=^6.0.3&logo=ionic&logoColor=lightblue&color=blue&style=flat-square)](https://ionicframework.com)
+<a href="https://ionicframework.com" target="_blank">
+    <img src="https://img.shields.io/static/v1?label=Ionic&message=^6.0.3&logo=ionic&logoColor=lightblue&color=blue&style=flat-square" 
+        alt="Ionic Framework"/>
+</a>
 
-[![Anuglar v6](https://img.shields.io/static/v1?label=Angular&message=^14.0.0&logo=angular&logoColor=red&color=blue&style=flat-square)](https://angular.io/)
+<a href="https://angular.io" target="_blank">
+    <img src="https://img.shields.io/static/v1?label=Angular&message=^14.0.0&logo=angular&logoColor=red&color=blue&style=flat-square" 
+        alt="Angular"/>
+</a>
 
 ## Licença
 
