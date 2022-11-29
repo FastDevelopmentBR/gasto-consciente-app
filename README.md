@@ -40,10 +40,10 @@ $ npm start
 
 ## Licença
 
-[![Licença GPLv3](https://img.shields.io/github/license/codecompanybrasil/community-mud-backend?label=Licen%C3%A7a&style=flat-square)](LICENSE)
+[![Licença GPLv3](https://img.shields.io/github/license/FastDevelopmentBR/community-mud-backend?label=Licen%C3%A7a&style=flat-square)](LICENSE)
 
 O link abaixo contém uma tradução da licença que pode estar desatualizada em relação a versão utilizada no projeto.<br/>
-[![Licença GPLv3 (pt-BR)](https://img.shields.io/github/license/codecompanybrasil/community-mud-backend?label=Licen%C3%A7a%20(pt-BR)&style=flat-square)](https://www.gnu.org/licenses/quick-guide-gplv3.pt-br.html)
+[![Licença GPLv3 (pt-BR)](https://img.shields.io/github/license/FastDevelopmentBR/community-mud-backend?label=Licen%C3%A7a%20(pt-BR)&style=flat-square)](https://www.gnu.org/licenses/quick-guide-gplv3.pt-br.html)
 
 ## Notas
 ### 27/11/2022 - Nota de Esclarecimento - Transferência do Projeto de Origanização no Github

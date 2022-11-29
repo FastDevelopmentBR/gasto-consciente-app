@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-    appId: 'org.codecompanybrasil.gastoconsciente',
+    appId: 'br.com.fastdeveloment.gastoconsciente',
     appName: 'gasto-consciente-app',
     webDir: 'www',
     bundledWebRuntime: false
