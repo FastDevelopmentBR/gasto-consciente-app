@@ -8,19 +8,23 @@ const routes: Routes = [
         component: TabsPage,
         children: [
             {
+                path: 'timeline',
+                loadChildren: () => import('../timeline/timeline.module').then(m => m.TimelinePageModule)
+            },
+            {
                 path: 'tab1',
                 loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
             },
             {
                 path: '',
-                redirectTo: '/tabs/tab1',
+                redirectTo: '/tabs/timeline',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/timeline',
         pathMatch: 'full'
     }
 ];

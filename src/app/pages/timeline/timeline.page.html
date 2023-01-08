@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Linha do Tempo
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Linha do Tempo</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <div *ngFor="let movimentation of movimentations">
+        <p>{{ movimentation | json }}</p>
+    </div>
+
+    <ion-grid>
+        <ion-row>
+            <ng-container *ngFor="let month of months"
+                          [ngTemplateOutlet]="monthTemplate"
+                          [ngTemplateOutletContext]="{month}"></ng-container>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ng-template #monthTemplate
+             let-month="month">
+
+    <ion-col sizeXs="12"
+             sizeMd="6"
+             sizeXl="4">
+        <ion-list>
+            <ion-list-header color="gcprimary">
+                <ion-label class="ion-text-capitalize">{{ month.title }}</ion-label>
+                <ion-button color="secondary">
+                    <ion-icon slot="icon-only"
+                              name="add"></ion-icon>
+                </ion-button>
+            </ion-list-header>
+            <ion-item *ngFor="let movimentation of month.movimentations; index as index"
+                      class="ion-activatable"
+                      lines="inset">
+                <!-- (click)="presentActionSheet(movimentation, month.date, index)"> -->
+                <ion-note slot="start">Dia {{ getFormattedDate(movimentation.movimentation_date) }}</ion-note>
+                <ion-label>{{ movimentation.title }}</ion-label>
+                <ion-label slot="end"
+                           [color]="movimentation.type == 0 ? 'success' : 'danger'">
+                    <strong>R$ {{ movimentation.value.toFixed(2) }}</strong>
+                </ion-label>
+            </ion-item>
+            <ion-item *ngIf="month.movimentations.length == 0"
+                      color="secondary">
+                <ion-label>Não existem movimetações nesse mês.</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-col>
+</ng-template>
