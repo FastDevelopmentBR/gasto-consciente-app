@@ -5,6 +5,7 @@ import { DatabaseService } from '../../services/db/database.service';
 import { MovimentationsRepositoryService } from '../../services/db/movimentations-repository.service';
 
 import { Movimentation } from '../../services/db/movimentation';
+import * as dayjs from 'dayjs';
 
 @Component({
     selector: 'app-tab1',
@@ -12,6 +13,7 @@ import { Movimentation } from '../../services/db/movimentation';
     styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+    movimentationList: Movimentation[] = []
     movimentation: Movimentation = undefined
 
     constructor(public platform: Platform,
@@ -24,8 +26,18 @@ export class Tab1Page {
             if (res) {
                 this.movimentationsRepository.getMovimentation(1)
                     .then(data => this.movimentation = data)
+
             }
-        });
+
+            this.movimentationsRepository.fetchMovimentations().subscribe({
+                next: (movimentations) => {
+                    this.movimentationList = movimentations
+                },
+                error: (err) => {
+                    console.log(err)
+                }
+            });
+        })
     }
 
     addMovimentation() {
@@ -49,5 +61,9 @@ export class Tab1Page {
 
     clearTableMovimentation() {
         this.movimentationsRepository.clearMovimentations()
+    }
+
+    getBuildDate() {
+        return '2023-01-08 15:57'
     }
 }

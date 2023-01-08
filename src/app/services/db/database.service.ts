@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 import { SQLite, SQLiteDatabaseConfig, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { SQLitePorter } from '@awesome-cordova-plugins/sqlite-porter/ngx';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -32,8 +34,11 @@ export class DatabaseService {
                     .create(this.databaseConfig)
                     .then((db: SQLiteObject) => {
                         this.storage = db;
-                        this.getFakeData();
-                        this.getAll('movimentations');
+
+                        // Insere dados fakes ao rodar um build que não seja de produção.
+                        if (!environment.production) {
+                            this.getFakeData();
+                        }
                     });
             }
         });
@@ -49,18 +54,25 @@ export class DatabaseService {
             'assets/dump.sql',
             { responseType: 'text' }
         ).subscribe(data => {
-            this.clearTable('movimentations') // TODO: Remover Após desenvolvimento.
             this.sqlitePorter.importSqlToDb(this.storage, data)
-                .then(() => this.isReady.next(true))
+                .then(() => {
+                    this.isReady.next(true)
+                    this.updateRepository('movimentations');
+                })
                 .catch(error => console.error(error));
         });
+    }
+
+    updateRepository(tableName) {
+        this.getAll(tableName)
+            .then(data => this[tableName].next(data))
     }
 
     getAll(tableName) {
         let query = `SELECT * FROM ${tableName}`
 
-        return this.storage
-            .executeSql(query, []).then(res => {
+        return this.storage.executeSql(query, [])
+            .then(res => {
                 let items: any[] = [];
 
                 if (res.rows.length > 0)
@@ -68,16 +80,13 @@ export class DatabaseService {
                         let item = res.rows.item(i)
                         items.push(item);
                     }
-
-                this[tableName].next(items);
+                return items
             });
     }
 
     getById(tableName: string, id: number): Promise<Object> {
         let query = `SELECT * FROM ${tableName} WHERE id = ?`
-
-        return this.storage
-            .executeSql(query, [id])
+        return this.storage.executeSql(query, [id])
             .then(res => res.rows.item(0));
     }
 
@@ -86,7 +95,7 @@ export class DatabaseService {
         let values = Object.values(data)
         let query = `INSERT INTO ${tableName} (${collumns.join(', ')}) VALUES (${Array(collumns.length).fill('?').join(',')})`
         return this.storage.executeSql(query, values)
-            .then(() => this.getAll(tableName))
+            .then(() => this.updateRepository(tableName))
     }
 
     update(tableName: string, id: number, data) {
@@ -94,13 +103,13 @@ export class DatabaseService {
         let values = Object.values(data)
         let query = `UPDATE ${tableName} SET ${collumns.map(data => data + '= ?').join(', ')} WHERE id = ${id}`
         return this.storage.executeSql(query, values)
-            .then(() => this.getAll(tableName))
+            .then(() => this.updateRepository(tableName))
     }
 
     delete(tableName: string, id: number) {
         let query = `DELETE FROM ${tableName} WHERE id = ?`
         return this.storage.executeSql(query, [id])
-            .then(() => this.getAll(tableName))
+            .then(() => this.updateRepository(tableName))
     }
 
     clearTable(tableName: string) {

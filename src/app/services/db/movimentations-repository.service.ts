@@ -10,11 +10,7 @@ export class MovimentationsRepositoryService {
 
     constructor(private databaseService: DatabaseService) { }
 
-    fetchMovimentations() {
-        return this.databaseService.movimentations.asObservable();
-    }
-
-    getMovimentations(): Observable<Movimentation[]> {
+    fetchMovimentations(): Observable<Movimentation[]>  {
         return this.databaseService.movimentations.asObservable();
     }
 
